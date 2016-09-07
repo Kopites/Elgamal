@@ -70,12 +70,6 @@ class ElgamalCipher(object):
             encryptedBlocks.append(C2)
         return encryptedBlocks
 
-    def stringToBigInt(self, inStr):
-        bigInt = 0
-        for i in range(len(inStr) - 1, -1, -1):
-            bigInt += (ord(inStr[i]) - ord('0')) * (pow(10, len(inStr) - i - 1))
-        return bigInt
-
     def decryptMessage(self, encryptedBlocks, messageLength, privateKey, blockSize=DEFAULT_BLOCK_SIZE):
 
         decryptedBlocks = []
