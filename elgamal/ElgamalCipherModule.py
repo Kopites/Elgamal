@@ -6,10 +6,9 @@ DEFAULT_BLOCK_SIZE = 128 # 128 bytes
 BYTE_SIZE = 256 # One byte has 256 different values.
 
 class ElgamalCipher(object):
-
     def main(self):
         filename = 'encrypted_file.txt' # the file to write to/read from
-        mode = 'encrypt'
+        mode = 'decrypt'
 
         if mode == 'encrypt':
             fo = open("message.txt", "r")
@@ -54,6 +53,7 @@ class ElgamalCipher(object):
                     asciiNumber = blockInt // (BYTE_SIZE ** i)
                     blockInt = blockInt % (BYTE_SIZE ** i)
                     blockMessage.insert(0, chr(asciiNumber))
+
             message.extend(blockMessage)
         return ''.join(message)
 
@@ -70,21 +70,23 @@ class ElgamalCipher(object):
             encryptedBlocks.append(C2)
         return encryptedBlocks
 
+    def stringToBigInt(self, inStr):
+        bigInt = 0
+        for i in range(len(inStr) - 1, -1, -1):
+            bigInt += (ord(inStr[i]) - ord('0')) * (pow(10, len(inStr) - i - 1))
+        return bigInt
+
     def decryptMessage(self, encryptedBlocks, messageLength, privateKey, blockSize=DEFAULT_BLOCK_SIZE):
 
         decryptedBlocks = []
         p, alpha, Xa = privateKey
-        ############### ERORR HERE ##############
-        # temporary list C archive C1 & C2
+        for i in range(0, len(encryptedBlocks), 2):
+            C1 = int(encryptedBlocks[i])
+            C2 = int(encryptedBlocks[i + 1])
+            R = pow(C1, p - 1 - Xa, p)
+            M = ((R % p) * (C2 % p)) % p
+            decryptedBlocks.append(M)
 
-        C = []
-        for block in encryptedBlocks:
-            C.append(block)
-        C1 = C.pop(0)
-        C2 = C.pop(0)
-        R = pow(C1, p - 1 - Xa, p)
-        decryptedBlocks.append(((R % p) * (C2 % p)) % p)
-        ###########################################
         return self.getTextFromBlocks(decryptedBlocks, messageLength, blockSize)
 
     def readKeyFile(self, keyFilename):
@@ -100,11 +102,11 @@ class ElgamalCipher(object):
     def encryptAndWriteToFile(self, messageFilename, keyFilename, message, blockSize=DEFAULT_BLOCK_SIZE):
 
         keySize, q, alpha, Ya = self.readKeyFile(keyFilename)
-        '''
+
         # Check that key size is greater than block size.
         if keySize < blockSize * 8: # * 8 to convert bytes to bits
             sys.exit('ERROR: Block size is %s bits and key size is %s bits. The Elgamal cipher requires the block size to be equal to or greater than the key size. Either decrease the block size or use different keys.' % (blockSize * 8, keySize))
-        '''
+
 
         # Encrypt the message
         encryptedBlocks = self.encryptMessage(message, (q, alpha, Ya), blockSize)
@@ -116,6 +118,7 @@ class ElgamalCipher(object):
 
         # Write out the encrypted string to the output file.
         encryptedContent = '%s_%s_%s' % (len(message), blockSize, encryptedContent)
+
         fo = open(messageFilename, 'w')
         fo.write(encryptedContent)
         fo.close()

@@ -10,6 +10,7 @@ class Shank(object):
         self.keysize = keysize
     def genKeys(self):
         objMakeKeys = MakeElgamalKeysModule.MakeElgamalKeys()
+        print("p, alpha, beta")
         objMakeKeys.generateKeys(self.keysize)
 
     def crack(self, p, alpha, beta):
@@ -44,7 +45,7 @@ class Shank(object):
         return tmpx
 
     def main(self):
-        p, alpha, beta = 97,5,44
+        p, alpha, beta = 19237254,24678877,2950937
 
         self.crack(p, alpha, beta)
         return None
@@ -73,7 +74,7 @@ class Shank(object):
     '''
 
 if __name__ == '__main__':
-    keysize = 20
+    keysize = 24
     obj = Shank(keysize)
     obj.genKeys()
     #obj.main()
