@@ -23,7 +23,7 @@ Elgamal Cryptosystem and Digital Signature
     3. Using A(public key) to Verify
     4. Using B(public key) to Encrypt
     5. Using B(private key) to Decrypt
-   - Therefore, Our Elgamal CryptoSystem is passed: CIA(Confidentiality, Integrity, Availability) model
+# Therefore, Our Elgamal CryptoSystem is passed: CIA(Confidentiality, Integrity, Availability) model
 # For help:
   - Email: anhquan@gmail.com
   - Facebook: https://facebook.com/Kopites
