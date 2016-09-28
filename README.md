@@ -1,5 +1,5 @@
 
-# Elgamal FinalProject
+# Elgamal Cryptosystem Project
 
 - Foreword: This Elgamal Crytosystem is developed as my Final Project at Crypto Theory Subject
 - Copyright @AnhQuan under GNU License v2
@@ -8,7 +8,7 @@ Elgamal Cryptosystem and Digital Signature
 
 
 # Project Structure
-  - FinalProject
+  - Elgamal Cryptosystem
     + breakElgamal: using Shank algorithm to find out private key
     + elgamal: Encrypt/Decrypt modulde
     + elgamalDS: Encrypt/Decrypt + Digital Signature modulde
