@@ -2,12 +2,15 @@
 # break the Elgamal using Shank algorithm
 
 import math
-from elgamal import MakeElgamalKeysModule
+
 from elgamal import  ElgamalCipherModule
+from elgamal import MakeElgamalKeysModule
+
 
 class Shank(object):
     def __init__(self, keysize=0):
         self.keysize = keysize
+
     def genKeys(self):
         objMakeKeys = MakeElgamalKeysModule.MakeElgamalKeys()
         print("p, alpha, beta")
@@ -46,7 +49,6 @@ class Shank(object):
 
     def main(self):
         p, alpha, beta = 19237254,24678877,2950937
-
         self.crack(p, alpha, beta)
         return None
 
@@ -54,7 +56,6 @@ class Shank(object):
         assert beta == pow(alpha, x, p)
         print("passed!")
 
-    '''
     def main(self):
         p, alpha, beta = 954829, 758750, 655544
         block_size = 128
@@ -71,10 +72,10 @@ class Shank(object):
         print(len(decryptedText))
 
         return None
-    '''
+
 
 if __name__ == '__main__':
-    keysize = 24
+    keysize = 1024
     obj = Shank(keysize)
     obj.genKeys()
     #obj.main()

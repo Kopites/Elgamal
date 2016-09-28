@@ -2,7 +2,8 @@
 import random
 
 class RabinMiller(object):
-
+    def __init__(self):
+        pass
     def rabinMiller(self, num):
         s = num - 1
         t = 0
@@ -48,3 +49,6 @@ class RabinMiller(object):
             if self.isPrime(p):
                 return p
 
+
+x = RabinMiller()
+x.generateLargePrime(1024)

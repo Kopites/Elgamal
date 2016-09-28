@@ -1,11 +1,13 @@
-import os, sys, random
+import random
+
 from elgamal import RabinMillerModule
 
 NAME = "Elgamal"
 KEY_SIZE = 1024
 
 class MakeElgamalKeys(object):
-
+    def __int__(self):
+        pass
     def findPrimitiveRoot(self, p):
         if p == 2:
             return 1
@@ -21,8 +23,8 @@ class MakeElgamalKeys(object):
     def generateKeys(self, keysize):
         rabinOjb = RabinMillerModule.RabinMiller()
         p = rabinOjb.generateLargePrime(keysize)
-        #alpha = self.findPrimitiveRoot(p)
-        alpha = random.randrange(1, p - 1)
+        alpha = self.findPrimitiveRoot(p)
+        # alpha = random.randrange(1, p - 1)
         Xa = random.randrange(1, p)
         Ya = pow(alpha, Xa, p)
 
@@ -34,12 +36,12 @@ class MakeElgamalKeys(object):
         return (publicKey, privateKey)
 
     def makeKeyFiles(self, name, keySize):
-
+        '''
         if os.path.exists('%s_pubkey.txt' % (name)) or os.path.exists('%s_privkey.txt' % (name)):
             sys.exit(
                 'WARNING: The file %s_pubkey.txt or %s_privkey.txt already exists! Use a different name or delete these files and re-run this program.' % (
                 name, name))
-
+        '''
 
         publicKey, privateKey = self.generateKeys(keySize)
 

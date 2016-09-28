@@ -1,11 +1,12 @@
-
-import sys
 import random
+import sys
 
 DEFAULT_BLOCK_SIZE = 128 # 128 bytes
 BYTE_SIZE = 256 # One byte has 256 different values.
 
 class ElgamalCipher(object):
+    def __init__(self):
+        pass
     def main(self):
         filename = 'encrypted_file.txt' # the file to write to/read from
         mode = 'decrypt'
